@@ -18,4 +18,9 @@ export default {
 </script>
 
 <style scoped>
+  .board {
+    height: 80%;
+    margin: 5% 0;
+    width: 100%;
+  }
 </style>
