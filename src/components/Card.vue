@@ -1,18 +1,15 @@
 <template>
-  <div class="scoreboard">
-  </div>
 </template>
 
 <script>
-
 export default {
   data() {
     return {
-      moves: 0,
     };
   },
 };
 </script>
 
 <style scoped>
+
 </style>
