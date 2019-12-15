@@ -21,6 +21,7 @@ export default {
   .board {
     height: 80%;
     margin: 5% 0;
+    position: absolute;
     width: 100%;
   }
 </style>
