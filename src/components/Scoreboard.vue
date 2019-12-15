@@ -1,7 +1,7 @@
 <template>
   <div class="scoreboard">
     <span>Moves:</span>
-    <strong>{{moves}}</strong>
+    <strong>{{ moves }}</strong>
   </div>
 </template>
 
@@ -10,8 +10,17 @@
 export default {
   data() {
     return {
-      moves: 0,
     };
+  },
+  computed: {
+    moves() {
+      return this.$store.state.moves;
+    },
+  },
+  methods: {
+    incrementMoves() {
+      this.$store.commit('increment_moves');
+    },
   },
 };
 </script>

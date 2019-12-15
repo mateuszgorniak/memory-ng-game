@@ -14,6 +14,11 @@ const store = new Vuex.Store({
     cards: [],
     moves: 0,
   },
+  mutations: {
+    increment_moves(state) {
+      state.moves += 1;
+    },
+  },
 });
 
 new Vue({
