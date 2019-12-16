@@ -1,6 +1,6 @@
 <template>
   <div class="board">
-    <card v-for="card of cards"></card>
+    <card v-for="(card, index) of cards" :key="index"></card>
   </div>
 </template>
 
@@ -9,10 +9,12 @@ import Card from './Card';
 
 export default {
   components: { Card },
-  data() {
-    return {
-      cards: [],
-    };
+  computed: {
+    cards() {
+      return this.$store.state.cards;
+    },
+  },
+  methods: {
   },
 };
 </script>
