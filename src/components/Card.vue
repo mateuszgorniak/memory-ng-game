@@ -40,7 +40,7 @@ export default {
   width: 20%;
 }
 
-.card.found .content {
+.card.matched .content {
   transform: rotateY( 180deg ) ;
 }
 
