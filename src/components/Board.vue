@@ -22,8 +22,8 @@ export default {
 <style scoped>
   .board {
     height: 80%;
-    margin: 5% 0;
     position: absolute;
+    top: 15%;
     width: 100%;
   }
 </style>
