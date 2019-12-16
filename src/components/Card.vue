@@ -15,7 +15,7 @@
 export default {
   methods: {
     selectCard() {
-      this.$store.commit('markCardAsSelected', this.card.id);
+      this.$store.dispatch('makeMove', this.card.id);
     },
   },
   computed: {

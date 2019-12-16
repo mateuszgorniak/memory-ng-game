@@ -47,7 +47,27 @@ const store = new Vuex.Store({
     cards: restartBoard(),
     moves: 0,
   },
+  actions: {
+    makeMove(context, cardId) {
+      context.commit('markCardAsSelected', cardId);
+
+      const selectedCards = this.getters.selectedCards;
+
+      if (selectedCards.length === 2) {
+        context.commit('blockMoves');
+
+        setTimeout(() => {
+          context.commit('incrementMoves');
+          context.commit('checkPair', selectedCards);
+          context.commit('unblockMoves');
+        }, 1000);
+      }
+    },
+  },
   getters: {
+    findCardById: (state) => (id) => {
+      return state.cards.find(card => card.id === id);
+    },
     matchedCards(state) {
       return state.cards.filter(card => card.matched);
     },
@@ -56,11 +76,19 @@ const store = new Vuex.Store({
     },
   },
   mutations: {
+    checkPair(state, selectedCards) {
+      const pair = selectedCards[0].value === selectedCards[1].value;
+
+      selectedCards.forEach((card) => {
+        card.matched = pair;
+        card.selected = false;
+      });
+    },
     incrementMoves(state) {
       state.moves += 1;
     },
     markCardAsSelected(state, cardId) {
-      const card = state.cards.find(item => item.id === cardId);
+      const card = this.getters.findCardById(cardId);
 
       if (!card.matched) {
         card.selected = true;
