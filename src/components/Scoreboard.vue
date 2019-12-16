@@ -19,7 +19,7 @@ export default {
   },
   methods: {
     incrementMoves() {
-      this.$store.commit('increment_moves');
+      this.$store.commit('incrementMoves');
     },
   },
 };

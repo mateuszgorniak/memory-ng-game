@@ -56,7 +56,7 @@ const store = new Vuex.Store({
     },
   },
   mutations: {
-    increment_moves(state) {
+    incrementMoves(state) {
       state.moves += 1;
     },
   },
