@@ -5,7 +5,7 @@
         Image
       </div>
       <div class="back">
-        Value
+        {{card.value}}
       </div>
     </div>
   </div>
