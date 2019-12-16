@@ -46,21 +46,24 @@ const store = new Vuex.Store({
   state: {
     cards: restartBoard(),
     moves: 0,
+    movesBlocked: false,
   },
   actions: {
     makeMove(context, cardId) {
-      context.commit('markCardAsSelected', cardId);
+      if (!this.state.movesBlocked) {
+        context.commit('markCardAsSelected', cardId);
 
-      const selectedCards = this.getters.selectedCards;
+        const selectedCards = this.getters.selectedCards;
 
-      if (selectedCards.length === 2) {
-        context.commit('blockMoves');
+        if (selectedCards.length === 2) {
+          context.commit('blockMoves');
 
-        setTimeout(() => {
-          context.commit('incrementMoves');
-          context.commit('checkPair', selectedCards);
-          context.commit('unblockMoves');
-        }, 1000);
+          setTimeout(() => {
+            context.commit('incrementMoves');
+            context.commit('checkPair', selectedCards);
+            context.commit('unblockMoves');
+          }, 1000);
+        }
       }
     },
   },
@@ -76,6 +79,9 @@ const store = new Vuex.Store({
     },
   },
   mutations: {
+    blockMoves(state) {
+      state.movesBlocked = true;
+    },
     checkPair(state, selectedCards) {
       const pair = selectedCards[0].value === selectedCards[1].value;
 
@@ -93,6 +99,9 @@ const store = new Vuex.Store({
       if (!card.matched) {
         card.selected = true;
       }
+    },
+    unblockMoves(state) {
+      state.movesBlocked = false;
     },
   },
 });
