@@ -1,6 +1,6 @@
 <template>
   <div class="board">
-    <card v-for="(card, index) of cards" :key="index"></card>
+    <card v-for="(card, index) of cards" v-bind:card="card" :key="index"></card>
   </div>
 </template>
 

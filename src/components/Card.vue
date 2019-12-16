@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card" v-on:click="selectCard" v-bind:class="classObject">
     <div class="content">
       <div class="front">
         Image
@@ -13,9 +13,21 @@
 
 <script>
 export default {
-  data() {
-    return {
-    };
+  methods: {
+    selectCard() {
+      this.$store.commit('markCardAsSelected', this.card.id);
+    },
+  },
+  computed: {
+    classObject() {
+      return {
+        matched: this.card.matched,
+        selected: this.card.selected,
+      };
+    },
+  },
+  props: {
+    card: Object,
   },
 };
 </script>

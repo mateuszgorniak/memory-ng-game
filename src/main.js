@@ -32,7 +32,7 @@ function restartBoard() {
       const value = Math.floor(Math.random() * BOARD_UNIQUE_VALUES);
 
       if (valuesUsageBoard[value] > 0) {
-        board[i] = { value, matched: false, selected: false };
+        board[i] = { value, id: i, matched: false, selected: false };
         valuesUsageBoard[value] -= 1;
       }
     } while (board[i] == null);
@@ -58,6 +58,13 @@ const store = new Vuex.Store({
   mutations: {
     incrementMoves(state) {
       state.moves += 1;
+    },
+    markCardAsSelected(state, cardId) {
+      const card = state.cards.find(item => item.id === cardId);
+
+      if (!card.matched) {
+        card.selected = true;
+      }
     },
   },
 });
