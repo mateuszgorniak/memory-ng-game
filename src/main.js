@@ -57,9 +57,9 @@ const store = new Vuex.Store({
 
         if (selectedCards.length === 2) {
           context.commit('blockMoves');
+          context.commit('incrementMoves');
 
           setTimeout(() => {
-            context.commit('incrementMoves');
             context.commit('checkPair', selectedCards);
             context.commit('unblockMoves');
           }, 1000);
