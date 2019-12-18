@@ -21,9 +21,10 @@ export default {
 
 <style scoped>
   .board {
-    height: 80%;
-    position: absolute;
-    top: 15%;
-    width: 100%;
+    display: flex;
+    flex: 1 1 80%;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 2.5%;
   }
 </style>

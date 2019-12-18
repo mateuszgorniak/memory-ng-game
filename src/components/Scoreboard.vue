@@ -29,12 +29,11 @@ export default {
   .scoreboard {
     align-items: center;
     display: flex;
+    flex: 1 1 10%;
     flex-flow: column;
     font-size: 20px;
+    font-variant: small-caps;
     justify-content: center;
-    height: 10%;
-    text-align: center;
-    position: absolute;
-    width: 100%;
+    padding: 2.5%;
   }
 </style>

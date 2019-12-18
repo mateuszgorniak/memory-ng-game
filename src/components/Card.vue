@@ -1,9 +1,7 @@
 <template>
   <div class="card" v-on:click="selectCard" v-bind:class="classObject">
     <div class="content">
-      <div class="front">
-        Image
-      </div>
+      <div class="front"></div>
       <div class="back">
         {{card.value}}
       </div>
@@ -34,10 +32,8 @@ export default {
 
 <style scoped>
 .card {
-  display: inline-block;
-  height: 20%;
+  flex: 1 1 20%;
   margin: 2.25%;
-  width: 20%;
 }
 
 .card.matched .content {
@@ -68,13 +64,14 @@ export default {
 }
 
 .back {
-  background: #03446A;
-  color: white;
   transform: rotateY( 180deg );
 }
 
 .front {
-  background: white;
-  color: #03446A;
+  background-color: #03446A;
+  background-image: url('~@/assets/netguru_logo.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20%;
 }
 </style>

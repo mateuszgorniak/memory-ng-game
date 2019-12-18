@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page">
     <scoreboard></scoreboard>
     <board></board>
   </div>
@@ -19,4 +19,9 @@ export default {
 </script>
 
 <style scoped>
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 </style>
