@@ -37,11 +37,11 @@ export default {
 }
 
 .card.matched .content {
-  transform: rotateY( 180deg ) ;
+  transform: rotateY( 180deg ) translate(0, 20%);
 }
 
 .card.selected .content {
-  transform: rotateY( 180deg ) ;
+  transform: rotateY( 180deg ) translate(0, 20%);
   transition: transform 0.5s;
 }
 
@@ -57,7 +57,7 @@ export default {
 .front {
   backface-visibility: hidden;
   border-radius: 5px;
-  font-size: 30px;
+  font-size: 55px;
   height: 100%;
   position: absolute;
   width: 100%;

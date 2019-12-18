@@ -13,6 +13,13 @@ const BOARD_WIDTH = 4;
 const BOARD_ELEMENTS = BOARD_HEIGHT * BOARD_WIDTH;
 const BOARD_UNIQUE_VALUES = BOARD_ELEMENTS / 2;
 
+function emoji() {
+  return ["🙄", "😏", "😂", "🥶", "😃",
+          "🤨", "😅", "😆", "🤢", "😡",
+          "😋", "😎", "😍", "😘", "🥰",
+          "😗", "🤬", "🤡", "😭", "🥵"];
+}
+
 function generateValuesUsageBoard() {
   const board = [];
 
@@ -32,7 +39,7 @@ function restartBoard() {
       const value = Math.floor(Math.random() * BOARD_UNIQUE_VALUES);
 
       if (valuesUsageBoard[value] > 0) {
-        board[i] = { value, id: i, matched: false, selected: false };
+        board[i] = { id: i, matched: false, value: emoji()[value], selected: false };
         valuesUsageBoard[value] -= 1;
       }
     } while (board[i] == null);
