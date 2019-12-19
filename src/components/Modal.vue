@@ -18,6 +18,11 @@ export default {
       return this.$store.state.moves;
     },
   },
+  methods: {
+    restartGame() {
+      this.$store.dispatch('restartGame');
+    },
+  },
 };
 </script>
 

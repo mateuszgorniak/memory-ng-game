@@ -14,10 +14,10 @@ const BOARD_ELEMENTS = BOARD_HEIGHT * BOARD_WIDTH;
 const BOARD_UNIQUE_VALUES = BOARD_ELEMENTS / 2;
 
 function emoji() {
-  return ["🙄", "😏", "😂", "🥶", "😃",
-          "🤨", "😅", "😆", "🤢", "😡",
-          "😋", "😎", "😍", "😘", "🥰",
-          "😗", "🤬", "🤡", "😭", "🥵"];
+  return ['🙄', '😏', '😂', '🥶', '😃',
+    '🤨', '😅', '😆', '🤢', '😡',
+    '😋', '😎', '😍', '😘', '🥰',
+    '😗', '🤬', '🤡', '😭', '🥵'];
 }
 
 function generateValuesUsageBoard() {
@@ -48,13 +48,13 @@ function restartBoard() {
   return board;
 }
 
+function initialState() {
+  return { cards: restartBoard(), gameFinished: false, moves: 0, movesBlocked: false };
+}
+
 /* eslint-disable no-new */
 const store = new Vuex.Store({
-  state: {
-    cards: restartBoard(),
-    moves: 0,
-    movesBlocked: false,
-  },
+  state: initialState,
   actions: {
     makeMove(context, cardId) {
       if (!this.state.movesBlocked) {
@@ -65,13 +65,23 @@ const store = new Vuex.Store({
         if (selectedCards.length === 2) {
           context.commit('blockMoves');
           context.commit('incrementMoves');
+          context.commit('checkPair', selectedCards);
 
-          setTimeout(() => {
-            context.commit('checkPair', selectedCards);
-            context.commit('unblockMoves');
-          }, 1000);
+          const notMatchedCards = this.getters.notMatchedCards;
+
+          if (notMatchedCards.length === 0) {
+            context.commit('finishGame');
+          } else {
+            setTimeout(() => {
+              context.commit('undoCardsSelection', selectedCards);
+              context.commit('unblockMoves');
+            }, 1000);
+          }
         }
       }
+    },
+    restartGame(context) {
+      context.commit('restartGame');
     },
   },
   getters: {
@@ -80,6 +90,9 @@ const store = new Vuex.Store({
     },
     matchedCards(state) {
       return state.cards.filter(card => card.matched);
+    },
+    notMatchedCards(state) {
+      return state.cards.filter(card => !card.matched);
     },
     selectedCards(state) {
       return state.cards.filter(card => card.selected);
@@ -94,12 +107,15 @@ const store = new Vuex.Store({
 
       selectedCards.forEach((card) => {
         card.matched = pair;
-        card.selected = false;
       });
+    },
+    finishGame(state) {
+      state.gameFinished = true;
     },
     incrementMoves(state) {
       state.moves += 1;
     },
+
     markCardAsSelected(state, cardId) {
       const card = this.getters.findCardById(cardId);
 
@@ -107,8 +123,19 @@ const store = new Vuex.Store({
         card.selected = true;
       }
     },
+    restartGame(state) {
+      const defaultState = initialState();
+      Object.keys(defaultState).forEach((key) => {
+        state[key] = defaultState[key];
+      });
+    },
     unblockMoves(state) {
       state.movesBlocked = false;
+    },
+    undoCardsSelection(state, selectedCards) {
+      selectedCards.forEach((card) => {
+        card.selected = false;
+      });
     },
   },
 });
