@@ -14,8 +14,6 @@ export default {
       return this.$store.state.cards;
     },
   },
-  methods: {
-  },
 };
 </script>
 

@@ -8,10 +8,6 @@
 <script>
 
 export default {
-  data() {
-    return {
-    };
-  },
   computed: {
     moves() {
       return this.$store.state.moves;

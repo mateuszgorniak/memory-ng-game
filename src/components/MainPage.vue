@@ -11,10 +11,6 @@ import Scoreboard from './Scoreboard';
 
 export default {
   components: { Board, Scoreboard },
-  data() {
-    return {
-    };
-  },
 };
 </script>
 
